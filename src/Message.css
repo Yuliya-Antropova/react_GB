@@ -1,0 +1,15 @@
+.message {
+    background-color: #F8F8F8;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    border-radius: 20px;
+}
+.message-text {
+    font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+  margin-top: 50px;
+  padding-bottom: 25px;
+  color: #333333;
+}
