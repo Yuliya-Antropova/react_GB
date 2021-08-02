@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './MessageList.css'
 
 
-export const Component = (props) => {
+export const MessageList = (props) => {
 
     // const authorsMess = [
     //     {author: 'Yulya', text: 'Hi', id: Math.random()},
@@ -16,54 +16,49 @@ export const Component = (props) => {
     //     {author: 'Katya', text: 'I am there', id: Math.random()},
     // ]
     
-    const [MessageList, setMessageList] = useState([]);
+    const [messageList, setMessageList] = useState([]);
 
     useEffect(() => {
-        if (MessageList.length && MessageList[MessageList.length - 1].author !== 'Robot') {
+        if (messageList.length && messageList[messageList.length - 1].author !== 'Robot') {
             const robotMess = { author: 'Robot', text: 'Hello, i am Robot, nice to meet you', id: Math.random() };
             setTimeout(() => {
-               setMessageList([...MessageList, robotMess]); 
+               setMessageList([...messageList, robotMess]); 
             }, 1000);
             
         }
-    }, [MessageList]);
-
-
-    const handleClick = () => {
-        const newMessage = { author: 'Yulya', text: value, id: Math.random() }; 
-        setMessageList([...MessageList, newMessage]);
-        setValue('');
-    }
+    }, [messageList]);
 
     const [value, setValue] = useState('');
 
     const handleChange = (e) => {
         setValue(e.target.value);
     }
-    const addMessToForm = (e) => {
+    const handleSubmit = (e) => {
+        const newMessage = { author: 'Yulya', text: value, id: Math.random() }; 
+        setMessageList([...messageList, newMessage]);
+        setValue('');
         e.preventDefault();
+        
     }
 
-    //это работает при перезагрузке страницы, а дальше только 1 раз - если нажать кнопку отправить.
-    //пока не разобралась почему.
     const inputAutofocus = useRef(null);
     useEffect(() => {
         if (inputAutofocus.current) {
             inputAutofocus.current.focus();
         }
-      }, [inputAutofocus.current]);
+      }, [inputAutofocus.current, messageList.length]);
 
 
     return (
-        <form onSubmit = {addMessToForm} className="form">          
+        <form onSubmit = { handleSubmit } className="form">          
             <div className="messages">
-                {MessageList.map((mess) => (
+                {messageList.map((mess) => (
                     <Message author = {mess.author} text={mess.text} key={mess.id}/>
                 ))}
             </div>
             <div className="input-style">
                 <input type="text" value={ value } onChange = { handleChange } placeholder='Add your message' ref={inputAutofocus}/>
-                <Button variant="dark" type="submit" onClick ={handleClick}>Send</Button>{' '}
+                <Button variant="dark" type="submit">Send</Button>{' '}
             </div>  
         </form>
     )

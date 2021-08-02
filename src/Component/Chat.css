@@ -1,0 +1,20 @@
+.li-chat {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.li-chat:hover {
+    background-color: #c4c4c4;
+}
+.li-chat-text {
+    padding-left: 10px;
+    opacity: 0.5;
+}
+.chat-list-p {
+    color: #333333;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 10px;
+}

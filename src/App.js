@@ -1,12 +1,14 @@
 import './App.css';
-import { Component } from './Component/MessageList';
+import { MessageList } from './Component/MessageList';
+import { ChatList } from './Component/ChatList';
 
 
 function App(props) {
  return (
    <div className="App">
      <div className="App-header">       
-       <Component />
+       <MessageList />
+        <ChatList />
      </div>
    </div>
  );
