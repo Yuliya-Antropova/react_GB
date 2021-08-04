@@ -1,0 +1,6 @@
+.chat-list {
+    box-shadow: 0 10px 15px rgb(0 0 0 / 40%);
+    position: absolute;
+    top: 0;
+    left: -230px;
+}
