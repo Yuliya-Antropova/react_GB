@@ -1,24 +1,19 @@
-import { Chat } from './Chat';
-
+import { NavLink } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 import './ChatList.css'
 
-export const ChatList = (props) => {
+export const ChatList = ({ chats }) => {
 
-    // const [chatList, setMessageList] = useState([]);
-
-    const chatList = [
-            {author: 'Yulya', text: 'Hi', id: Math.random()},
-            {author: 'Misha', text: 'Hello', id: Math.random()},
-            {author: 'Vlad', text: 'Whats up?', id: Math.random()},
-            {author: 'Katya', text: 'I am there', id: Math.random()},
-        ];
+   
+    
     return ( 
         <ListGroup as="ul" className="chat-list">
             <p className="chat-list-p">Your chats</p>
-            {chatList.map((chats) => (
-                <Chat author = {chats.author} text={chats.text} key={chats.id}/>
-            ))}
+            <ListGroup.Item as="li" className="li-chat" key={chats.id}>
+                {Object.values(chats).map((chats) => (
+                    <NavLink to={`/home/${chats.id}`}  activeClassName="chat-active">{chats.name} {chats.text} </NavLink>
+                ))}
+            </ListGroup.Item>            
         </ListGroup>
         )
 }
