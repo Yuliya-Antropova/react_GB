@@ -1,23 +1,35 @@
-import { NavLink } from 'react-router-dom';
-import ListGroup from 'react-bootstrap/ListGroup';
-import './ChatList.css'
-
-export const ChatList = ({ chats }) => {
-
-   
-    
-    return ( 
-        <ListGroup as="ul" className="chat-list">
-            <p className="chat-list-p">Your chats</p>
-            <ListGroup.Item as="li" className="li-chat" key={chats.id}>
-                {Object.values(chats).map((chats) => (
-                    <NavLink to={`/home/${chats.id}`}  activeClassName="chat-active">{chats.name} {chats.text} </NavLink>
-                ))}
-            </ListGroup.Item>            
-        </ListGroup>
-        )
-}
+import ListGroup from "react-bootstrap/ListGroup";
+import "./ChatList.css";
+import { AddChat } from "./AddChat";
+import { ChatItem } from "./ChatItem";
 
 
+export const ChatList = ({ chats, onDeleteChat }) => {
+
+  return (
+    <ListGroup as="ul" className="chat-list">
+      <p className="chat-list-p">Your chats</p>
+      {Object.values(chats).map((ch) => (
 
 
+          <ChatItem 
+          name={ch.name}
+          key={ch.id}
+          id={ch.id}
+          text={ch.text}
+          onDelete={onDeleteChat}
+          />
+
+        // <ListGroup.Item as="li" className="li-chat" key={chats.id}>
+        //   <NavLink to={`/home/${ch.id}`} activeClassName="chat-active">
+        //     {ch.name} {ch.text}
+        //   </NavLink>
+        //   <button onClick={handleDeleteChat}>-</button>
+        // </ListGroup.Item>
+      ))}
+      <ListGroup.Item as="li" className="li-chat">
+        <AddChat />
+      </ListGroup.Item>
+    </ListGroup>
+  );
+};

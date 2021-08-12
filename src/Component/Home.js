@@ -1,76 +1,60 @@
-import './Home.css';
+import "./Home.css";
 import { useEffect, useCallback, useState } from "react";
-import { MessageList } from './MessageList';
-import { ChatList } from './ChatList';
-import { Form } from './Form';
+import { MessageList } from "./MessageList";
+import { ChatList } from "./ChatList";
+import { Form } from "./Form";
 
 import { useParams } from "react-router";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-const initialChats = {
-  chat1: {
-      messages: [{author: 'Yulya', text: 'Hi', id: Math.random()}],
-      name: 'Chat1',
-      id: 'chat1'
-  },
-  chat2: {
-      messages: [{author: 'Misha', text: 'Hello', id: Math.random()}],
-      name: 'Chat2',
-      id: 'chat2'
-  },        
-  chat3: {
-      messages: [{author: 'Vlad', text: 'Whats up?', id: Math.random()}],
-      name: 'Chat3',
-      id: 'chat3'
-  },        
-  chat4: {
-      messages: [{author: 'Katya', text: 'I am there', id: Math.random()}],
-      name: 'Chat4',
-      id: 'chat4'
-  }        
-}
+import "bootstrap/dist/css/bootstrap.min.css";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteChat, sendMessage } from "../store/chats/actionCreators";
+import { getChats, getName } from "../store/selectors";
+import { useHistory } from "react-router-dom";
 
 export const Home = () => {
-
   const { chatId } = useParams();
-  const [chats, setChats] = useState(initialChats);
+  const history = useHistory();
+
+  const chats = useSelector(getChats);
+  const name = useSelector(getName)
+  const dispatch = useDispatch();
 
   const handleSendMessage = useCallback(
     (newMessage) => {
-      setChats({
-        ...chats,
-        [chatId]: {
-          ...chats[chatId],
-          messages: [...chats[chatId].messages, newMessage],
-        },
-      });
+      dispatch(sendMessage(chatId, {...newMessage, author: name}));
     },
-    [chats, chatId]
+    [chatId]
   );
 
-   useEffect(() => {
-        if (!chatId || 
-          !chats[chatId]?.messages.length || 
-          chats[chatId].messages[chats[chatId].messages.length - 1].author !== 'Robot') {
-            const robotMess = { author: 'Robot', text: 'Hello, i am Robot, nice to meet you', id: Math.random() };
-            setTimeout(() => {
-              handleSendMessage(robotMess); 
-            }, 1000);
-            
-        }
-    }, [chats]);
+  const handleDeleteChat = useCallback((id) => {
+    dispatch(deleteChat(id));
+  }, []);
 
- return (
-  <div className="App">
-    <div className="App-header">   
-      <ChatList chats={chats} />
-      {!!chatId && (
-        <div  className="form">
-          <MessageList messages={chats[chatId].messages} />
-          <Form onSendMessage={handleSendMessage} />
-        </div>
-      )}
+  if (!!chatId && !chats[chatId]) {
+    history.replace('/no-chat');
+  }
+
+  //  useEffect(() => {
+  //       if (chatId || chats[chatId]?.messages.length || chats[chatId].messages[chats[chatId].messages.length - 1].author !== 'Robot') {
+  //           const robotMess = { author: 'Robot', text: 'Hello, i am Robot, nice to meet you', id: Math.random() };
+  //           setTimeout(() => {
+  //             handleSendMessage(robotMess);
+  //           }, 1000);
+
+  //       }
+  //   }, [chats]);
+
+  return (
+    <div className="App">
+      <div className="App-header">
+        <ChatList chats={chats} onDeleteChat={handleDeleteChat} />
+        {!!chatId && chats[chatId] &&(
+          <div className="form">
+            <MessageList messages={chats[chatId].messages} />
+            <Form onSendMessage={handleSendMessage} />
+          </div>
+        )}
+      </div>
     </div>
-   </div>
- );
-}
+  );
+};

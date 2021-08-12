@@ -1,9 +1,9 @@
 import { useDebugValue } from "react";
-import { PROFILE_CHANGE_SHOW } from "../profile/actions";
+import { PROFILE_CHANGE_SHOW, PROFILE_SET_NAME } from "./actionsTypes";
 
 const initialState = {
     show: false,
-    name: 'Yulya',
+    name: '',
 }
 
 export const profileReducer = (state = initialState, action) => {
@@ -14,7 +14,14 @@ export const profileReducer = (state = initialState, action) => {
                 show: !state.show
             }
         }
+        case (PROFILE_SET_NAME): {
+            return {
+                ...state,
+                name: action.payload
+            }
+        }
         default:
             return state;
     }
+    
 }

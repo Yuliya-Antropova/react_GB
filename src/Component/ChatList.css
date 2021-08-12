@@ -3,6 +3,7 @@
     position: absolute;
     top: 0;
     left: -230px;
+    width: 250px;
 }
 .li-chat {
     display: flex;
@@ -36,3 +37,19 @@
     background-color: #333333;
     color: white!important;
 }
+.li-chat input {
+    width: 100%;
+}
+.li-chat button {
+    margin: 20px 0;
+    background-color: #333333;
+    width: 70%;
+    color: white;
+    border: none;
+    border-radius: .25rem;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 1rem;
+    padding: .375rem .75rem;
+}
+
