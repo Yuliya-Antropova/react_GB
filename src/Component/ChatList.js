@@ -19,13 +19,6 @@ export const ChatList = ({ chats, onDeleteChat }) => {
           text={ch.text}
           onDelete={onDeleteChat}
           />
-
-        // <ListGroup.Item as="li" className="li-chat" key={chats.id}>
-        //   <NavLink to={`/home/${ch.id}`} activeClassName="chat-active">
-        //     {ch.name} {ch.text}
-        //   </NavLink>
-        //   <button onClick={handleDeleteChat}>-</button>
-        // </ListGroup.Item>
       ))}
       <ListGroup.Item as="li" className="li-chat">
         <AddChat />

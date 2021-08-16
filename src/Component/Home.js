@@ -7,7 +7,7 @@ import { Form } from "./Form";
 import { useParams } from "react-router";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteChat, sendMessage } from "../store/chats/actionCreators";
+import { deleteChat, sendMessageWithReply } from "../store/chats/actionCreators";
 import { getChats, getName } from "../store/selectors";
 import { useHistory } from "react-router-dom";
 
@@ -16,12 +16,12 @@ export const Home = () => {
   const history = useHistory();
 
   const chats = useSelector(getChats);
-  const name = useSelector(getName)
+  const name = useSelector(getName);
   const dispatch = useDispatch();
 
   const handleSendMessage = useCallback(
     (newMessage) => {
-      dispatch(sendMessage(chatId, {...newMessage, author: name}));
+      dispatch(sendMessageWithReply(chatId, {...newMessage, author: name}));
     },
     [chatId]
   );
@@ -33,16 +33,6 @@ export const Home = () => {
   if (!!chatId && !chats[chatId]) {
     history.replace('/no-chat');
   }
-
-  //  useEffect(() => {
-  //       if (chatId || chats[chatId]?.messages.length || chats[chatId].messages[chats[chatId].messages.length - 1].author !== 'Robot') {
-  //           const robotMess = { author: 'Robot', text: 'Hello, i am Robot, nice to meet you', id: Math.random() };
-  //           setTimeout(() => {
-  //             handleSendMessage(robotMess);
-  //           }, 1000);
-
-  //       }
-  //   }, [chats]);
 
   return (
     <div className="App">

@@ -2,21 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MessageList.css'
+import { useInput } from "../utils/useInput";
 
 export const Form = ({ onSendMessage }) => {
-    const [value, setValue] = useState('');
 
-    const handleChange = (e) => {
-        setValue(e.target.value);
-    }
+    const { value, handleChange, reset } = useInput('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         onSendMessage({
-            author: 'Yulya', text: value, id: Math.random()
+            text: value, id: Math.random()
         });
-        setValue('');       
+        reset();       
     }
 
     const inputAutofocus = useRef(null);

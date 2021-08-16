@@ -1,16 +1,13 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import { addChat } from "../store/chats/actionCreators";
+import { useInput } from "../utils/useInput";
 
 export const AddChat = () => {
 
     const dispatch = useDispatch();
 
-    const [value, setValue] = useState('');
-
-    const handleChange = (e) => {
-        setValue(e.target.value);
-    }
+    const { value, handleChange, reset } = useInput('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +16,7 @@ export const AddChat = () => {
         }
         const newId = `chat-${Date.now()}`;
         dispatch(addChat(newId, value));
-        setValue("")
+        reset();
     }
 
     return (

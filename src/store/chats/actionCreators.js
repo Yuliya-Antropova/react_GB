@@ -20,3 +20,18 @@ export const sendMessage = (chatId, message) => ({
         message,
     }
 })
+let timeout;
+
+export const sendMessageWithReply = (chatId, message) => (dispatch) => {
+    dispatch(sendMessage(chatId, message));
+
+    if(timeout) {
+        clearTimeout(timeout);
+    }
+
+    const robotMess = { author: 'Robot', text: 'Hello, i am Robot, nice to meet you', id: Math.random() };
+
+    timeout = setTimeout(() => {
+        dispatch(sendMessage(chatId, robotMess));
+    }, 1000)
+}
