@@ -1,16 +1,14 @@
-import './App.css';
-import { MessageList } from './Component/MessageList';
-import { ChatList } from './Component/ChatList';
+import { Router } from './Component/Router';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 
 function App(props) {
- return (
-   <div className="App">
-     <div className="App-header">       
-       <MessageList />
-        <ChatList />
-     </div>
-   </div>
+ return (   
+    <Provider store={store}>
+       <Router />
+    </Provider>
+    
  );
 }
 
