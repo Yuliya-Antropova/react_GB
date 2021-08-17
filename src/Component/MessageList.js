@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { Message } from "./Message";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './MessageList.css'
+import { Message } from "./Message/Message";
 
 export const MessageList = ({ messages }) => {
     

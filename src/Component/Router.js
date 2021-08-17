@@ -25,6 +25,10 @@ export const Router = () => {
                 <Route path="/home/:chatId?">
                     <Home />
                 </Route>
+                <Route path="/no-chat">
+                    <h2>Choose correct chat</h2>
+                    <Link to="/home">HOME</Link>
+                </Route>
                 <Route path="*">
                     <h2>PAGE NOT FOUNDS</h2>
                 </Route>
