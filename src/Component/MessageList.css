@@ -41,3 +41,32 @@
     border-bottom-left-radius: 0;
     border-top-left-radius: 0;
 }
+.input-login {
+    position: absolute;
+    bottom: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    align-items: center;
+}
+.input-login-text {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    width: 250px;
+    outline: none;
+    border: 1px solid #333333;
+    margin-bottom: 10px;
+}
+.input-login-button {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
+    width: 250px;
+    outline: none;
+    border: 1px solid #fff;
+    background-color: #333333;
+    color: white;
+}

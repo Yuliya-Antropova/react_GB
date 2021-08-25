@@ -1,5 +1,6 @@
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom';
 import { Home } from './Home';
+import { Images } from './Images';
 import { Profile } from './Profile';
 import "./Router.css";
 
@@ -13,6 +14,9 @@ export const Router = () => {
                 <li>
                     <Link to="/profile">PROFILE</Link>
                 </li>
+                <li>
+                    <Link to="/images">SPACE IMAGES</Link>
+                </li>
             </ul>
 
             <Switch>
@@ -24,6 +28,9 @@ export const Router = () => {
                 </Route>
                 <Route path="/home/:chatId?">
                     <Home />
+                </Route>
+                <Route path="/images">
+                    <Images />
                 </Route>
                 <Route path="/no-chat">
                     <h2>Choose correct chat</h2>
